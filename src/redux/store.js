@@ -14,7 +14,7 @@ function reducer(state = INIT_STORE, action) {
     case ACTIONS.STOP:
       return {...state, running: false};
     case ACTIONS.SET_ELAPSED:
-      return {...state, elapsedTime: action.payload - state.startTime};
+      return state.running ? {...state, elapsedTime: action.payload - state.startTime} : state;
     default:
       return state;
   }

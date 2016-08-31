@@ -8,13 +8,24 @@ import './App.css';
 
 class App extends Component {
 
+  componentWillUnmount() {
+    window.cancelAnimationFrame(this.timerId);
+  }
+
+  componentDidMount() {
+    const tick = () => {
+      this.props.elapsed();
+      return window.requestAnimationFrame(tick);
+    };
+    this.timerId = tick();
+  }
+
   render() {
-    var startTime = this.props.startTime;
     return (
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo"/>
-          <h2>Welcome to React! { startTime} </h2>
+          <h2>Welcome to React! { this.props.elapsedTime } </h2>
         </div>
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.

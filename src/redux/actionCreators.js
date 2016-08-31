@@ -1,7 +1,6 @@
 import ACTIONS from './actions';
 
 export function start() {
-  console.log('start is called')
   return {type: ACTIONS.START, payload: Date.now()};
 }
 
